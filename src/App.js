@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Posts from './components/Posts';
+import PostForm from './components/PostForm';
 
-function App() {
-  return (
-    <div className="App">
-      <Posts />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <>
+        <h1>Welcome</h1>
+        <PostForm />
+        <Posts />
+      </>
+    )
+  }
 }
+
 
 export default App;
