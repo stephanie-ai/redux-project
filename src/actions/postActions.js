@@ -12,5 +12,24 @@ export const fetchPosts = () => dispatch => {
         .then(posts => dispatch({
             type: FETCH_POSTS,
             payload: posts
-        }))
+        })
+    );
 }
+
+// this is so that it can dispatch a new post to the reducer
+
+export const createPost = postData => dispatch => {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+    })
+    .then(res => res.json())
+    .then(post => dispatch({
+        type: NEW_POST,
+        payload: post
+    }));
+}
+

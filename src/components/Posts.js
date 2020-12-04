@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/postActions;
+import { fetchPosts } from '../actions/postActions';
 
 // connect will connect the components to the redux store that is provided by the provider component
 
@@ -9,6 +9,14 @@ class Posts extends Component {
 
     componentWillMount() {
         this.props.fetchPosts();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        // when it receives a new property from the state
+        if(nextProps.newPost) {
+            // add the post to the beginning
+            this.props.posts.unshift(nextProps.newPost)
+        }
     }
 
     render() {
@@ -30,13 +38,15 @@ class Posts extends Component {
 Posts.propTypes = {
     // fetchposts function is a property
     fetchPosts: PropTypes.func.isRequired,
-    posts: PropTypes.array.isRequired
+    posts: PropTypes.array.isRequired,
+    newPost: PropTypes.object
 }
 
 // we have to get the new items from the state using mSTP and then map the properties to the component and use that inside
 
 const mSTP = state => ({
-    posts: state.posts.items
+    posts: state.posts.items,
+    newPost: state.posts.item
 });
 
 export default connect(mSTP, { fetchPosts })(Posts);
