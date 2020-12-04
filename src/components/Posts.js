@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/postActions;
 
@@ -24,6 +25,12 @@ class Posts extends Component {
             </div>
         )
     }
+}
+
+Posts.propTypes = {
+    // fetchposts function is a property
+    fetchPosts: PropTypes.func.isRequired,
+    posts: PropTypes.array.isRequired
 }
 
 // we have to get the new items from the state using mSTP and then map the properties to the component and use that inside
